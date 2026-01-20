@@ -41,3 +41,12 @@ public:
         return true;
     }
 };
+
+
+
+Character	ASCII	ch - 'a'	Index
+'a'	97	0	count[0]
+'b'	98	1	count[1]
+'c'	99	2	count[2]
+...			
+'z'	122	25	count[25]
