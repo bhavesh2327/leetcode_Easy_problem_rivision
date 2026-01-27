@@ -1,0 +1,58 @@
+/*
+Problem:
+Remove all occurrences of a given value `val` from the vector `nums` in-place.
+Return the number of elements left after removal.
+The first `k` elements of `nums` should contain the result.
+
+Approach:
+We use the two-pointer technique.
+
+- Pointer `i` scans each element of the array.
+- Pointer `j` keeps track of the position where the next valid
+  (not equal to `val`) element should be placed.
+
+Whenever nums[i] != val:
+- Copy nums[i] to nums[j]
+- Increment j
+
+At the end:
+- `j` represents the count of elements not equal to `val`
+- The first `j` elements of `nums` contain the final array
+*/
+
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int i = 0; // pointer to traverse the array
+        int j = 0; // pointer for placing non-val elements
+
+        // Traverse the entire array
+        while (i < nums.size()) {
+            // If current element is not equal to val
+            if (nums[i] != val) {
+                nums[j] = nums[i]; // place it at position j
+                j++;               // move j forward
+            }
+            i++; // always move i forward
+        }
+
+        // j is the number of valid elements remaining
+        return j;
+    }
+};
+
+/*
+Example Dry Run:
+nums = [3, 2, 2, 3], val = 3
+
+i=0 -> nums[i]=3 (skip)
+i=1 -> nums[i]=2 -> nums[0]=2, j=1
+i=2 -> nums[i]=2 -> nums[1]=2, j=2
+i=3 -> nums[i]=3 (skip)
+
+Return j = 2
+Final array (first 2 elements): [2, 2]
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+*/

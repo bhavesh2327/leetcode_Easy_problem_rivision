@@ -1,0 +1,52 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+
+        // ---------- APPROACH 1: SORTING ----------
+        // Time: O(n log n), Space: O(1)
+        /*
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+        return s == t;
+        */
+
+
+        // ---------- APPROACH 2: FREQUENCY COUNT (OPTIMIZED) ----------
+        // Time: O(n), Space: O(1)
+
+        // If lengths are different, they cannot be anagrams
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        vector<int> count(26, 0);
+
+        // Count characters in string s
+        for (char ch : s) {
+            count[ch - 'a']++;
+        }
+
+        // Subtract character counts using string t
+        for (char ch : t) {
+            count[ch - 'a']--;
+        }
+
+        // Check if all frequencies are zero
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+};
+
+
+
+Character	ASCII	ch - 'a'	Index
+'a'	97	0	count[0]
+'b'	98	1	count[1]
+'c'	99	2	count[2]
+...			
+'z'	122	25	count[25]
